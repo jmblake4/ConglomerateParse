@@ -13,12 +13,13 @@ Conglom.controller('RegisterController', ['$scope', '$http', '$rootScope', '$win
 		
 		user.signUp(null, {
 			success: function(user) {
-			// Hooray! Let them use the app now.
-			alert("success!");
+				console.log(user);
+				$rootScope.currentUser = user;
+				$rootScope.$apply();
+				$window.location.href = "#deck";
 			},
 			error: function(user, error) {
-			// Show the error message somewhere and let the user try again.
-			alert("Error: " + error.code + " " + error.message);
+				alert("Error: " + error.code + " " + error.message);
 			}
 		});
 		

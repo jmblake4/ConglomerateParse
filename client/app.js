@@ -1,9 +1,14 @@
+// Use APP ID and Javascript ID keys here
+// Parse.initialize('hsXwaCbf8H826BYlOGVPEDIkOG0dHC4sU17RFwqE','fLPbB6DwBnxmyHmcyXbEgkK9aNV3C2AzEkogDvJC');
+
 var Conglom = angular.module('Conglom', ['ngRoute', 'ngCookies'])
 
 Conglom.run(['$rootScope', '$location', '$cookieStore', '$http', function($rootScope, $location, $cookieStore, $http) {
-	Parse.initialize('peWEuER4pLGR2j0uWD4nzwF5P2J3uhiYM03KNNUE','W8FOTKJQptOrVaL98uMzdvlbPRyeDkV69F7uaOW6');
+	// Use APP ID and Javascript ID keys here
+	Parse.initialize('2vrwNvHrsNAFxQiLGpzqmqaogyyhbzarZuCYa1Mw','tnh6UEIFa5R6eJgdzF2Q2NS6VOQhJH0Xhz6qY9Z0');
+	$rootScope.currentUser = Parse.User.current;
 }]);
-	
+
 Conglom.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', {

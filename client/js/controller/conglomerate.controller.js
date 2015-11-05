@@ -1,15 +1,16 @@
 Conglom.controller('DeckController', ['$scope', '$http', '$rootScope', '$window', '$cacheFactory',  function($scope, $http, $rootScope, $window, $cacheFactory) {
 
-	$scope.stream1Hide = false;
-	$scope.stream2Hide = false;
-	$scope.stream3Hide = false;
-	$scope.stream4Hide = false;
-	var visibleStreams = 1;	
+	if ( $rootScope.currentUser.attributes === undefined ) {
+		$window.location.href = "#login";
+	}
+
+	$scope.userName = $rootScope.currentUser.attributes.username;
+	$scope.stream1Hide = true;
+	$scope.stream2Hide = true;
+	$scope.stream3Hide = true;
+	$scope.stream4Hide = true;
+	var visibleStreams = 0;	
 	$scope.widthClass = 'inner-' + visibleStreams.toString() + '-width';
-
-	var vm = this;
-
-	vm.user = null;
 	
 	$scope.addStream = function() {
 		console.log('adding stream');
@@ -23,8 +24,8 @@ Conglom.controller('DeckController', ['$scope', '$http', '$rootScope', '$window'
 	}
 	
 	$scope.removeStream = function() {
-		if ( visibleStreams === 1 ) {
-			alert('Only one stream remaining!')
+		if ( visibleStreams === 0 ) {
+			alert('No stream found to remove!');
 		} else {
 			eval('$scope.stream' + visibleStreams.toString() + 'Hide = true;');
 			visibleStreams--;
@@ -33,6 +34,8 @@ Conglom.controller('DeckController', ['$scope', '$http', '$rootScope', '$window'
 	}
 	
 	$scope.logout = function() {
+		Parse.User.logOut();
+		$rootScope.currentUser = null;
 		$window.location.href = '#login';
 	}
 
